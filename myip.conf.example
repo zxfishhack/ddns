@@ -1,0 +1,6 @@
+server {
+	listen 80 default_server;
+	server_name _;
+	add_header X-Client-IP $remote_addr;
+	return 200 $remote_addr;
+}
