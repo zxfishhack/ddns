@@ -1,7 +1,7 @@
 package ip
 
 import (
-	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
 )
@@ -25,7 +25,7 @@ func getIpFromWeb() (ip string, err error) {
 	resp, err = http.Get(bodyAddr)
 	if err == nil {
 		var b []byte
-		b, err = io.ReadAll(resp.Body)
+		b, err = ioutil.ReadAll(resp.Body)
 		ip = string(b)
 	}
 	return
