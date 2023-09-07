@@ -16,7 +16,14 @@ type aliyunDns struct {
 
 func New() (s inf.IDNSService, err error) {
 	aliyun := &aliyunDns{}
-	aliyun.client, err = alidns.NewClientWithAccessKey(os.Getenv("ALIDNS_REGION"), os.Getenv("ALIDNS_KEY"), os.Getenv("ALIDNS_SECRET"))
+	region := os.Getenv("ALIDNS_REGION")
+	key := os.Getenv("ALIDNS_KEY")
+	secret := os.Getenv("ALIDNS_SECRET")
+	if region == "" || key == "" || secret == "" {
+		err = inf.ErrNotAvailable
+		return
+	}
+	aliyun.client, err = alidns.NewClientWithAccessKey(region, key, secret)
 
 	if err == nil {
 		s = aliyun
