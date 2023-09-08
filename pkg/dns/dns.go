@@ -3,6 +3,7 @@ package dns
 import (
 	"github.com/zxfishhack/ddns/pkg/dns/aliyun"
 	"github.com/zxfishhack/ddns/pkg/dns/inf"
+	"github.com/zxfishhack/ddns/pkg/dns/namecheap"
 )
 
 var svc inf.IDNSService
@@ -13,8 +14,11 @@ func Init() (err error) {
 	if err == nil {
 		return
 	}
-	// try init others
-
+	// try init namecheap
+	svc, err = namecheap.New()
+	if err == nil {
+		return
+	}
 	return
 }
 
